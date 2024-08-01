@@ -3,7 +3,6 @@ import { routes } from './routes'
 import './styles.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-
 const App = () => {
   const [queryClient] = React.useState(
     () =>
@@ -15,14 +14,7 @@ const App = () => {
         },
       }),
   )
-  return (
-    <QueryClientProvider client={queryClient}>
-        <div className='app-container'>
-          <h1 className='large-text-center'>New Project</h1>
-          {routes}
-        </div>
-    </QueryClientProvider>
-  )
+  return <QueryClientProvider client={queryClient}>{routes}</QueryClientProvider>
 }
 
 export default App
