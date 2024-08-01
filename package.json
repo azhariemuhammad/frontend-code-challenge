@@ -6,13 +6,10 @@
   "scripts": {
     "test": "vitest",
     "clean": "rm -rf dist",
-    "build": "npm run clean && npm run build:client && npm run build:server",
-    "build:client": "vite build --base=/dist/client --outDir dist/client --ssrManifest",
-    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "dev:server": "node dist/server/entry-server.js",
+    "build": "npm run clean && npm run build:client",
+    "build:client": "vite build --base=/dist/client --outDir dist/client --ssrManifest",  
     "dev:client": "vite",
     "serve": "NODE_ENV=production node server",
-    "generate": "vite build --outDir dist/static && npm run build:server && node prerender.js",
     "lint": "eslint . --fix --max-warnings=0"
   },
   "keywords": [],

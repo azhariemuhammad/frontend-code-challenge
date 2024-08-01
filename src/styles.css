@@ -1,16 +1,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  /* background-color: #00050d; */
 }
 
 #root {
   min-height: 100vh;
-}
-
-@media (max-width: 768px) {
-  .container-sm-margin {
-    margin: 0;
-  }
 }
 
