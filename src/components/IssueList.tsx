@@ -26,12 +26,12 @@ export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => vo
       <Container maxW='container.xl' padding='2'>
         <Flex justifyContent='center' alignItems='center' flexDirection='column' gap={6}>
           <Grid templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6} w='full'>
-            {issues.map(({ id, title, description, imageUri, issueDate }) => (
+            {issues.map(({ id, title, imageUri, issueNumber, issueDate }) => (
               <GridItem key={id} w='full' h={{ sm: 'auto', md: 'auto' }}>
                 <IssueCard
                   title={title}
+                  issueNumber={issueNumber}
                   issueDate={issueDate}
-                  description={description}
                   imageUri={imageUri}
                   onOpenEditor={() => handleOpenEditor(id)}
                   onDeleteIssue={() => handleDeleteIssue(id)}

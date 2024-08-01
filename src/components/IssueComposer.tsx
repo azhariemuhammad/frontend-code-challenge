@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, Stack, Text, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { Box, Button, Flex, Stack, Text, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import { Issue } from '../types'
 
 type IssueComposerProps = {
@@ -19,7 +19,6 @@ export const IssueComposer = ({ defaultState, onSubmit }: IssueComposerProps) =>
         issueNumber: formData.get('issueNumber') ?? '',
         issueDate: formData.get('issueDate') ?? '',
         imageUri: formData.get('imageUri') ?? '',
-        description: formData.get('description') ?? '',
       }
 
       onSubmit({ ...defaultState, ...issue } as unknown as Issue)
@@ -56,10 +55,6 @@ export const IssueComposer = ({ defaultState, onSubmit }: IssueComposerProps) =>
           <FormControl>
             <FormLabel>Image URI</FormLabel>
             <Input isRequired defaultValue={defaultState?.imageUri} name='imageUri' placeholder='Image URI' />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Description</FormLabel>
-            <Textarea defaultValue={defaultState?.description} name='description' placeholder='Description' />
           </FormControl>
         </Stack>
         <Flex justifyContent='flex-end' mt='2'>

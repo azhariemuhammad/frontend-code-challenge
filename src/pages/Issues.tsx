@@ -25,7 +25,7 @@ export const Issues = () => {
     <>
       <Box my={8}>
         <Flex justifyContent='space-between' alignItems='center' gap={4} m={4}>
-          <Text fontWeight='medium' fontSize='2xl'>
+          <Text fontWeight='extrabold' fontSize='2xl'>
             Past Issues
           </Text>
           <Flex gap={2}>

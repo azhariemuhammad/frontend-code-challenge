@@ -4,7 +4,6 @@ export type Issue = {
   title: string
   issueNumber: number
   issueDate: string
-  description?: string
 }
 
 export type IssueList = Array<Issue>

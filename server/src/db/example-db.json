@@ -5,8 +5,7 @@
       "imageUri": "https://placehold.co/300x300/921A40/FFFFFF",
       "title": "Quantum Enigma",
       "issueNumber": 1,
-      "issueDate": "2024-01-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-01-01"
     },
     {
       "id": "a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p",
@@ -20,8 +19,7 @@
       "imageUri": "https://placehold.co/300x300/03346E/FFFFFF",
       "title": "Cosmic Nexus",
       "issueNumber": 3,
-      "issueDate": "2024-03-01",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "issueDate": "2024-03-01"
     },
     {
       "id": "q1w2e3r4-t5y6-u7i8-o9p0-a1s2d3f4g5h6",
@@ -35,8 +33,7 @@
       "imageUri": "https://placehold.co/300x300/C9DABF/FFFFFF",
       "title": "Synaptic Surge",
       "issueNumber": 5,
-      "issueDate": "2024-05-01",
-      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "issueDate": "2024-05-01"
     },
     {
       "id": "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
@@ -50,8 +47,7 @@
       "imageUri": "https://placehold.co/300x300/1A3636/FFFFFF",
       "title": "Quantum Quandary",
       "issueNumber": 7,
-      "issueDate": "2024-07-01",
-      "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "issueDate": "2024-07-01"
     },
     {
       "id": "r3s4t5u6-v7w8-x9y0-z1a2-b3c4d5e6f7g8",
@@ -65,8 +61,7 @@
       "imageUri": "https://placehold.co/300x300/021526/FFFFFF",
       "title": "Cyberscape",
       "issueNumber": 9,
-      "issueDate": "2024-09-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-09-01"
     },
     {
       "id": "x5y6z7a8-b9c0-d1e2-f3g4-h5i6j7k8l9m0",
@@ -80,8 +75,7 @@
       "imageUri": "https://placehold.co/300x300/201E43/FFFFFF",
       "title": "Neural Nexus",
       "issueNumber": 11,
-      "issueDate": "2024-11-01",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "issueDate": "2024-11-01"
     },
     {
       "id": "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
@@ -95,8 +89,7 @@
       "imageUri": "https://placehold.co/300x300/17153B/FFFFFF",
       "title": "Cybernetic Symphony",
       "issueNumber": 13,
-      "issueDate": "2025-01-01",
-      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "issueDate": "2025-01-01"
     },
     {
       "id": "j9k0l1m2-n3o4-p5q6-r7s8-t9u0v1w2x3y4",
@@ -110,8 +103,7 @@
       "imageUri": "https://placehold.co/300x300/921A40/FFFFFF",
       "title": "Astral Anomaly",
       "issueNumber": 15,
-      "issueDate": "2025-03-01",
-      "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "issueDate": "2025-03-01"
     },
     {
       "id": "p1q2r3s4-t5u6-v7w8-x9y0-z1a2b3c4d5e6",
@@ -125,8 +117,7 @@
       "imageUri": "https://placehold.co/300x300/03346E/FFFFFF",
       "title": "Holographic Harmony",
       "issueNumber": 17,
-      "issueDate": "2025-05-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2025-05-01"
     },
     {
       "id": "v3w4x5y6-z7a8-b9c0-d1e2-f3g4h5i6j7k8",
@@ -140,8 +131,7 @@
       "imageUri": "https://placehold.co/300x300/C9DABF/FFFFFF",
       "title": "Nebula's Whisper",
       "issueNumber": 19,
-      "issueDate": "2025-07-01",
-      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "issueDate": "2025-07-01"
     },
     {
       "id": "b5c6d7e8-f9g0-h1i2-j3k4-l5m6n7o8p9q0",

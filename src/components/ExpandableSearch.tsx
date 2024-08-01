@@ -4,7 +4,7 @@ import { SearchIcon } from '@chakra-ui/icons'
 
 const ExpandableSearch = ({ onSubmit }: { onSubmit: (title: string) => void }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleExpand = () => {
     setIsExpanded(true)

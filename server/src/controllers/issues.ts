@@ -13,7 +13,6 @@ const DB_PATH = path.join(__dirname, '../db/db.json')
 const readIssuesFromFile = async (): Promise<{ issues: Issue[] }> => {
   try {
     const stats = await fs.stat(DB_PATH)
-    console.log({ issuesCache })
     if (issuesCache === null || stats?.mtimeMs > lastModified) {
       const data = await fs.readFile(DB_PATH, 'utf8')
       if (data) {
@@ -69,24 +68,23 @@ const issueSchema = Joi.object({
   title: Joi.string().required(),
   issueNumber: Joi.number().required(),
   issueDate: Joi.string().required(),
-  description: Joi.string(),
 })
 
 // curl -X POST -H "Content-Type: application/json" -d '{"id":"1","imageUri":"https://github.com/github/explore/blob/main/topics/javascript/javascript.png?raw=true","title":"Issue 1","issueNumber":1,"issueDate":"2022-01-01"}' http://localhost:3001/api/v1/issues
 
 export const createIssue = async (req: Request, res: Response) => {
   try {
-    const { imageUri, title, issueNumber, issueDate, description } = req.body
+    const { imageUri, title, issueNumber, issueDate } = req.body
     const data = await readIssuesFromFile()
 
-    const { error } = issueSchema.validate({ imageUri, title, issueNumber, issueDate, description })
+    const { error } = issueSchema.validate({ imageUri, title, issueNumber, issueDate })
 
     if (error) {
       return res.status(400).send(error.message)
     }
 
     const newData = {
-      issues: [...data.issues, { id: uuid(), imageUri, title, issueNumber, issueDate, description }],
+      issues: [...data.issues, { id: uuid(), imageUri, title, issueNumber, issueDate }],
     }
     await fs.writeFile(DB_PATH, JSON.stringify(newData))
     res.status(201).json(newData)
@@ -99,7 +97,7 @@ export const createIssue = async (req: Request, res: Response) => {
 // curl -X PUT -H "Content-Type: application/json" -d '{"id":"a7a2f1f0-c8a6-4b1e-b2c7-a1b3b6f2bee","imageUri":"https://github.com/github/explore/blob/main/topics/javascript/javascript.png?raw=true","title":"Issue 18","issueNumber":1,"issueDate":"2022-01-01"}' http://localhost:3001/api/v1/issues/1
 export const updateIssue = async (req: Request, res: Response) => {
   try {
-    const { id, imageUri, title, issueNumber, issueDate, description } = req.body
+    const { id, imageUri, title, issueNumber, issueDate } = req.body
     const data = await readIssuesFromFile()
 
     const issue = data.issues.find((issue: Issue) => issue.id === id)
@@ -109,7 +107,7 @@ export const updateIssue = async (req: Request, res: Response) => {
       const newData = {
         issues: [
           ...data.issues.filter((issue: Issue) => issue.id !== id),
-          { id, imageUri, title, issueNumber, issueDate, description },
+          { id, imageUri, title, issueNumber, issueDate },
         ],
       }
       await fs.writeFile(DB_PATH, JSON.stringify(newData))

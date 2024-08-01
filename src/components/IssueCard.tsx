@@ -8,9 +8,9 @@ import {
   Heading,
   IconButton,
   Image,
-  Stack,
   Text,
   Menu,
+  Flex,
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import useLazyLoadImage from '../hooks/useLazyLoadImage'
@@ -18,8 +18,8 @@ import useLazyLoadImage from '../hooks/useLazyLoadImage'
 type IssueCardProps = {
   title: string
   imageUri: string
-  description?: string
   issueDate: string
+  issueNumber: number
   onOpenEditor: () => void
   onDeleteIssue: () => void
 }
@@ -42,7 +42,7 @@ const ThreeDotsVertical = () => {
   )
 }
 
-export const IssueCard = ({ title, imageUri, issueDate, description, onOpenEditor, onDeleteIssue }: IssueCardProps) => {
+export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEditor, onDeleteIssue }: IssueCardProps) => {
   const imgRef = useLazyLoadImage()
 
   return (
@@ -76,10 +76,11 @@ export const IssueCard = ({ title, imageUri, issueDate, description, onOpenEdito
       </Box>
       <CardBody p={2}>
         <Heading size='md'>{title}</Heading>
-        <Stack mt='6' spacing='3'>
-          <Text noOfLines={4}>{description}</Text>
-          <Text>{format(new Date(issueDate), 'dd MMMM yyyy')}</Text>
-        </Stack>
+        <Flex gap={2} fontWeight='medium' color='slategray'>
+          <Text>Issue: {issueNumber}</Text>
+          <span>|</span>
+          <Text>{format(new Date(issueDate), 'MMM yyyy')}</Text>
+        </Flex>
       </CardBody>
     </Card>
   )
