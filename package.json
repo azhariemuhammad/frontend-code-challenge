@@ -7,7 +7,7 @@
     "test": "vitest",
     "clean": "rm -rf dist",
     "build": "npm run clean && npm run build:client",
-    "build:client": "vite build --base=/dist/client --outDir dist/client --ssrManifest",  
+    "build:client": "vite build --base=/dist --outDir dist --ssrManifest",  
     "dev:client": "vite",
     "serve": "NODE_ENV=production node server",
     "lint": "eslint . --fix --max-warnings=0"
