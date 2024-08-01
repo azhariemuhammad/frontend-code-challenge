@@ -1,25 +1,86 @@
-import React from 'react'
-import { Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text, Button, ButtonGroup } from '@chakra-ui/react'
+import {
+  Card,
+  CardBody,
+  Box,
+  MenuList,
+  MenuItem,
+  MenuButton,
+  Heading,
+  IconButton,
+  Image,
+  Stack,
+  Text,
+  Menu,
+} from '@chakra-ui/react'
+import { format } from 'date-fns'
+import useLazyLoadImage from '../hooks/useLazyLoadImage'
 
-export const IssueCard = () => {
+type IssueCardProps = {
+  title: string
+  imageUri: string
+  description?: string
+  issueDate: string
+  onOpenEditor: () => void
+  onDeleteIssue: () => void
+}
+
+const ThreeDotsVertical = () => {
   return (
-    <div>
-      <Card maxW='sm'>
-        <CardBody>
-          <Image
-            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            alt='Green double couch with wooden legs'
-            borderRadius='lg'
-          />
-          <Stack mt='6' spacing='3'>
-            <Heading size='md'>Issue 24</Heading>
-            <Text>
-              This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for
-              people who love a chic design with a sprinkle of vintage design.
-            </Text>
-          </Stack>
-        </CardBody>
-      </Card>
-    </div>
+    <svg
+      stroke='white'
+      fill='white'
+      strokeWidth='0'
+      viewBox='0 0 16 16'
+      aria-hidden='true'
+      focusable='false'
+      height='1em'
+      width='1em'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path d='M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'></path>
+    </svg>
+  )
+}
+
+export const IssueCard = ({ title, imageUri, issueDate, description, onOpenEditor, onDeleteIssue }: IssueCardProps) => {
+  const imgRef = useLazyLoadImage()
+
+  return (
+    <Card w='full'>
+      <Box position='relative'>
+        <Menu isLazy>
+          <MenuButton
+            position='absolute'
+            right={0}
+            as={IconButton}
+            aria-label='Options'
+            variant={'ghost'}
+            _hover={{ bg: 'transparent' }}
+            icon={<ThreeDotsVertical />}
+          ></MenuButton>
+          <MenuList>
+            <MenuItem onClick={onOpenEditor}>Edit</MenuItem>
+            <MenuItem onClick={onDeleteIssue}>Delete</MenuItem>
+          </MenuList>
+        </Menu>
+        <Image
+          fallback={<Image src='https://via.placeholder.com/300x300' w='full' alt='Issue Image' />}
+          src={imageUri}
+          alt='Green double couch with wooden legs'
+          borderRadius='lg'
+          w='full'
+          objectFit='cover'
+          borderBottomLeftRadius={0}
+          borderBottomRightRadius={0}
+        />
+      </Box>
+      <CardBody p={2}>
+        <Heading size='md'>{title}</Heading>
+        <Stack mt='6' spacing='3'>
+          <Text noOfLines={4}>{description}</Text>
+          <Text>{format(new Date(issueDate), 'dd MMMM yyyy')}</Text>
+        </Stack>
+      </CardBody>
+    </Card>
   )
 }

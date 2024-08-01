@@ -6,7 +6,12 @@ import routes from './routes'
 const app = express()
 app.use(bodyParser.json())
 
-app.use(cors())
+// allow cross origin requests
+app.use(
+  cors({
+    origin: '*',
+  }),
+)
 
 app.use('/api/v1', routes)
 

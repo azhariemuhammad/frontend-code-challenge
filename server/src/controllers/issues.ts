@@ -30,8 +30,19 @@ const readIssuesFromFile = async (): Promise<{ issues: Issue[] }> => {
 }
 
 export const getIssues = async (req: Request, res: Response) => {
+  const query = req.query.q as string
   try {
     const issues = await readIssuesFromFile()
+    if (query) {
+      const issuesByTitle = issues.issues.reduce((acc: Array<Issue>, issue: Issue) => {
+        if (issue.title.toLowerCase().includes(query.toLowerCase())) {
+          acc = [...acc, issue]
+        }
+        return acc
+      }, [])
+      res.status(200).json({ issues: issuesByTitle })
+      return
+    }
     res.status(200).json(issues)
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving issues' })
@@ -47,24 +58,6 @@ export const getIssueById = async (req: Request, res: Response) => {
     } else {
       res.status(200).json(issue)
     }
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Error retrieving issue' })
-  }
-}
-
-export const getIssuesByTitle = async (req: Request, res: Response) => {
-  try {
-    const query = req.query.q as string
-    const data = await readIssuesFromFile()
-    const issue = data.issues.reduce((acc: Array<Issue>, issue: Issue) => {
-      if (issue.title.toLowerCase().includes(query.toLowerCase())) {
-        acc = [...acc, issue]
-      }
-      return acc
-    }, [])
-
-    res.status(200).json(issue)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Error retrieving issue' })
@@ -125,5 +118,24 @@ export const updateIssue = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Error updating issue' })
+  }
+}
+
+export const deleteIssueById = async (req: Request, res: Response) => {
+  try {
+    const data = await readIssuesFromFile()
+    const issue = data.issues.find((issue: Issue) => issue.id === req.params.id)
+    if (!issue) {
+      res.status(404).json({ error: 'Issue not found' })
+    } else {
+      const newData = {
+        issues: [...data.issues.filter((issue: Issue) => issue.id !== req.params.id)],
+      }
+      await fs.writeFile(DB_PATH, JSON.stringify(newData))
+      res.status(200).json(newData)
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Error deleting issue' })
   }
 }

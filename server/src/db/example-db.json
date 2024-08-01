@@ -13,8 +13,7 @@
       "imageUri": "https://placehold.co/300x300/021526/FFFFFF",
       "title": "Nebula's Echo",
       "issueNumber": 2,
-      "issueDate": "2024-02-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-02-01"
     },
     {
       "id": "p5o4n3m2-l1k0-j9i8-h7g6-f5e4d3c2b1a0",
@@ -29,8 +28,7 @@
       "imageUri": "https://placehold.co/300x300/201E43/FFFFFF",
       "title": "Temporal Flux",
       "issueNumber": 4,
-      "issueDate": "2024-04-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-04-01"
     },
     {
       "id": "z9x8c7v6-b5n4-m3l2-k1j0-h9g8f7d6s5a4",
@@ -45,8 +43,7 @@
       "imageUri": "https://placehold.co/300x300/17153B/FFFFFF",
       "title": "Neon Horizon",
       "issueNumber": 6,
-      "issueDate": "2024-06-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-06-01"
     },
     {
       "id": "a7b8c9d0-e1f2-g3h4-i5j6-k7l8m9n0p1q2",
@@ -61,8 +58,7 @@
       "imageUri": "https://placehold.co/300x300/921A40/FFFFFF",
       "title": "Stellar Synthesis",
       "issueNumber": 8,
-      "issueDate": "2024-08-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-08-01"
     },
     {
       "id": "h9i0j1k2-l3m4-n5o6-p7q8-r9s0t1u2v3w4",
@@ -77,8 +73,7 @@
       "imageUri": "https://placehold.co/300x300/03346E/FFFFFF",
       "title": "Ethereal Echoes",
       "issueNumber": 10,
-      "issueDate": "2024-10-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-10-01"
     },
     {
       "id": "n1o2p3q4-r5s6-t7u8-v9w0-x1y2z3a4b5c6",
@@ -93,8 +88,7 @@
       "imageUri": "https://placehold.co/300x300/C9DABF/FFFFFF",
       "title": "Quantum Quasar",
       "issueNumber": 12,
-      "issueDate": "2024-12-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2024-12-01"
     },
     {
       "id": "t3u4v5w6-x7y8-z9a0-b1c2-d3e4f5g6h7i8",
@@ -109,8 +103,7 @@
       "imageUri": "https://placehold.co/300x300/1A3636/FFFFFF",
       "title": "Galactic Groove",
       "issueNumber": 14,
-      "issueDate": "2025-02-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2025-02-01"
     },
     {
       "id": "z5a6b7c8-d9e0-f1g2-h3i4-j5k6l7m8n9o0",
@@ -125,8 +118,7 @@
       "imageUri": "https://placehold.co/300x300/021526/FFFFFF",
       "title": "Synthetic Souls",
       "issueNumber": 16,
-      "issueDate": "2025-04-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2025-04-01"
     },
     {
       "id": "f7g8h9i0-j1k2-l3m4-n5o6-p7q8r9s0t1u2",
@@ -141,8 +133,7 @@
       "imageUri": "https://placehold.co/300x300/201E43/FFFFFF",
       "title": "Cosmic Consciousness",
       "issueNumber": 18,
-      "issueDate": "2025-06-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2025-06-01"
     },
     {
       "id": "l9m0n1o2-p3q4-r5s6-t7u8-v9w0x1y2z3a4",
@@ -157,8 +148,7 @@
       "imageUri": "https://placehold.co/300x300/17153B/FFFFFF",
       "title": "Quantum Kaleidoscope",
       "issueNumber": 20,
-      "issueDate": "2025-08-01",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "issueDate": "2025-08-01"
     }
   ]
 }
