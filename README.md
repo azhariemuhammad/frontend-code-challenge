@@ -25,7 +25,8 @@ To run server
 
 ## System Design
 
-<img width="1087" alt="Screen Shot 2024-07-06 at 9 22 56 AM" src="https://github.com/azhariemuhammad/disney-clone/assets/19600009/405abc60-3b77-4522-80fb-977c860d5e13">
+![Screen Shot 2024-08-02 at 9 55 58 AM](https://github.com/user-attachments/assets/70874f04-4a2e-4d35-bc3a-3111c47effb5)
+
 
 ## File structure
 
