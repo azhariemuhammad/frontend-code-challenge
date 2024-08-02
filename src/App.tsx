@@ -2,6 +2,7 @@ import React from 'react'
 import { routes } from './routes'
 import './styles.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AlertProvider } from './components/AlertContext'
 
 const App = () => {
   const [queryClient] = React.useState(
@@ -14,7 +15,11 @@ const App = () => {
         },
       }),
   )
-  return <QueryClientProvider client={queryClient}>{routes}</QueryClientProvider>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AlertProvider>{routes}</AlertProvider>
+    </QueryClientProvider>
+  )
 }
 
 export default App

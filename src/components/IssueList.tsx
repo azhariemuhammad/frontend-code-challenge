@@ -5,8 +5,10 @@ import { IssueComposer } from './IssueComposer'
 import { useState } from 'react'
 import { useUpdateNewIssue } from '../hooks/useUpdateNewIssue'
 import { useDeleteIssue } from '../hooks/useDeleteIssue'
+import { useAlertContext } from './AlertContext'
 
 export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => void }) => {
+  const { addAlert } = useAlertContext()
   const [selectedIssue, setSelectedIssue] = useState('')
   const updateIssue = useUpdateNewIssue()
   const deleteIssue = useDeleteIssue()
@@ -18,7 +20,20 @@ export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => vo
   const handleDeleteIssue = (id: string) => {
     deleteIssue(id, () => {
       refetch()
+      addAlert({
+        status: 'success',
+        message: 'Issue deleted successfully',
+      })
     })
+  }
+
+  const onSuccessUpdateIssue = () => {
+    addAlert({
+      status: 'success',
+      message: 'Issue updated successfully',
+    })
+    setSelectedIssue('')
+    refetch()
   }
 
   return (
@@ -47,10 +62,7 @@ export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => vo
           <ModalContent>
             <IssueComposer
               onSubmit={updatedIssue => {
-                updateIssue(updatedIssue, () => {
-                  setSelectedIssue('')
-                  refetch()
-                })
+                updateIssue(updatedIssue, onSuccessUpdateIssue)
               }}
               defaultState={issues.find(issue => issue.id === selectedIssue)}
             />

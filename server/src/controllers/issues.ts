@@ -70,8 +70,6 @@ const issueSchema = Joi.object({
   issueDate: Joi.string().required(),
 })
 
-// curl -X POST -H "Content-Type: application/json" -d '{"id":"1","imageUri":"https://github.com/github/explore/blob/main/topics/javascript/javascript.png?raw=true","title":"Issue 1","issueNumber":1,"issueDate":"2022-01-01"}' http://localhost:3001/api/v1/issues
-
 export const createIssue = async (req: Request, res: Response) => {
   try {
     const { imageUri, title, issueNumber, issueDate } = req.body
@@ -84,7 +82,7 @@ export const createIssue = async (req: Request, res: Response) => {
     }
 
     const newData = {
-      issues: [...data.issues, { id: uuid(), imageUri, title, issueNumber, issueDate }],
+      issues: [{ id: uuid(), imageUri, title, issueNumber, issueDate }, ...data.issues],
     }
     await fs.writeFile(DB_PATH, JSON.stringify(newData))
     res.status(201).json(newData)
@@ -94,7 +92,6 @@ export const createIssue = async (req: Request, res: Response) => {
   }
 }
 
-// curl -X PUT -H "Content-Type: application/json" -d '{"id":"a7a2f1f0-c8a6-4b1e-b2c7-a1b3b6f2bee","imageUri":"https://github.com/github/explore/blob/main/topics/javascript/javascript.png?raw=true","title":"Issue 18","issueNumber":1,"issueDate":"2022-01-01"}' http://localhost:3001/api/v1/issues/1
 export const updateIssue = async (req: Request, res: Response) => {
   try {
     const { id, imageUri, title, issueNumber, issueDate } = req.body
