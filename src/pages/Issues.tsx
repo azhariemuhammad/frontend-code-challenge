@@ -13,7 +13,7 @@ export const Issues = () => {
     queryKey: ['issues', query],
     queryFn: () => fetch(`${config.apiUrl}/api/v1/issues?q=${query}`).then(res => res.json()),
   })
-  console.log({ query })
+
   const isSearching = query !== ''
 
   const createNewIssue = useCreateNewIssue()

@@ -8,7 +8,7 @@ import { Issue } from '../models/types'
 let issuesCache: { issues: Issue[] } | null = null
 let lastModified: number = 0
 
-const DB_PATH = path.join(__dirname, '../db/db.json')
+const DB_PATH = path.join(__dirname, '../../db/db.json')
 
 const readIssuesFromFile = async (): Promise<{ issues: Issue[] }> => {
   try {
