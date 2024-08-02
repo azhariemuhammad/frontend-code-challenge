@@ -11,6 +11,7 @@ import {
   Text,
   Menu,
   Flex,
+  AspectRatio,
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import useLazyLoadImage from '../hooks/useLazyLoadImage'
@@ -63,16 +64,18 @@ export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEdito
             <MenuItem onClick={onDeleteIssue}>Delete</MenuItem>
           </MenuList>
         </Menu>
-        <Image
-          fallback={<Image src='https://via.placeholder.com/300x300' w='full' alt='Issue Image' />}
-          src={imageUri}
-          alt='Green double couch with wooden legs'
-          borderRadius='lg'
-          w='full'
-          objectFit='cover'
-          borderBottomLeftRadius={0}
-          borderBottomRightRadius={0}
-        />
+        <AspectRatio ratio={1}>
+          <Image
+            fallback={<Image src='https://via.placeholder.com/300x300' w='full' alt='Issue Image' />}
+            src={imageUri}
+            alt='Green double couch with wooden legs'
+            borderRadius='lg'
+            w='full'
+            objectFit='cover'
+            borderBottomLeftRadius={0}
+            borderBottomRightRadius={0}
+          />
+        </AspectRatio>
       </Box>
       <CardBody p={2}>
         <Heading size='md'>{title}</Heading>
