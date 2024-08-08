@@ -7,9 +7,11 @@ import { config } from '../config'
 import { useCreateNewIssue } from '../hooks/useCreateNewIssue'
 import ExpandableSearch from '../components/ExpandableSearch'
 import { useAlertContext } from '../components/AlertContext'
-import { generateRandomUnsplashUrl } from '../utils/randomUnsplash'
+import LanguageSwitcher from '../components/LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 export const Issues = () => {
+  const { t } = useTranslation()
   const { addAlert } = useAlertContext()
   const [query, setQuery] = React.useState('')
   const queryResult = useQuery({
@@ -32,25 +34,28 @@ export const Issues = () => {
   const { data, isLoading, refetch } = queryResult
 
   const [isOpen, setIsOpen] = React.useState(false)
-  console.log(generateRandomUnsplashUrl())
+
   return (
     <>
       <Box my={8}>
         <Flex justifyContent='space-between' alignItems='center' gap={4} m={4} flexWrap={'wrap'}>
-          <Text fontWeight='600' fontSize='2xl' color='notion.800'>
-            Past Issues
-          </Text>
+          <Flex gap={4} w='fit-content' flexWrap='nowrap' alignItems='center'>
+            <Text fontWeight='600' fontSize='2xl' color='notion.800' whiteSpace='nowrap'>
+              {t('pastIssues')}
+            </Text>
+            <LanguageSwitcher />
+          </Flex>
           <Flex gap={2}>
             <ExpandableSearch onSubmit={(title: string) => setQuery(title)} />
             <Button bgColor='blue.400' color='white' onClick={() => setIsOpen(true)} fontSize='sm' fontWeight='medium'>
-              New Issue
+              {t('newIssue')}
             </Button>
           </Flex>
         </Flex>
         {isSearching && data?.issues.length === 0 ? (
           <Box h='2rem' textAlign='center' w='full' mt='8'>
             <Text fontSize='xl' fontWeight='medium' mb={4} color='notion.800'>
-              No results found for "{query}"
+              {t('noResult')} "{query}"
             </Text>
             <Button
               onClick={() => {
@@ -58,7 +63,7 @@ export const Issues = () => {
                 refetch()
               }}
             >
-              Refresh
+              {t('refresh')}
             </Button>
           </Box>
         ) : (
@@ -75,8 +80,8 @@ export const Issues = () => {
               createNewIssue(issue, () => {
                 refetch()
                 addAlert({
-                  status: 'success',
-                  message: 'Issue created successfully',
+                  status: t('success'),
+                  message: t('issueCreatedSuccessfully'),
                 })
               })
             }}

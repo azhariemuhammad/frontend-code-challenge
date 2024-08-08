@@ -15,6 +15,7 @@ import {
 import { format } from 'date-fns'
 import useLazyLoadImage from '../hooks/useLazyLoadImage'
 import { CalendarIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next'
 
 type IssueCardProps = {
   title: string
@@ -45,6 +46,7 @@ const ThreeDotsVertical = () => {
 
 export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEditor, onDeleteIssue }: IssueCardProps) => {
   const imgRef = useLazyLoadImage()
+  const { t } = useTranslation()
 
   return (
     <Card
@@ -68,8 +70,8 @@ export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEdito
             icon={<ThreeDotsVertical />}
           ></MenuButton>
           <MenuList>
-            <MenuItem onClick={onOpenEditor}>Edit</MenuItem>
-            <MenuItem onClick={onDeleteIssue}>Delete</MenuItem>
+            <MenuItem onClick={onOpenEditor}>{t('edit')}</MenuItem>
+            <MenuItem onClick={onDeleteIssue}>{t('delete')}</MenuItem>
           </MenuList>
         </Menu>
         <Image

@@ -23,6 +23,7 @@ import { useAlertContext } from './AlertContext'
 import { LoaderGrid } from './LoaderGrid'
 import { IssueList } from '../types'
 import { CalendarIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next'
 
 type ViewSwitchProps = {
   isGrid: boolean
@@ -76,6 +77,7 @@ const ViewSwitch = ({ isGrid, onToggle }: ViewSwitchProps) => {
 }
 
 export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
+  const { t } = useTranslation()
   const { addAlert } = useAlertContext()
   const [selectedIssue, setSelectedIssue] = useState('')
   const updateIssue = useUpdateNewIssue()
@@ -155,10 +157,10 @@ export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
                 </VStack>
                 <HStack>
                   <Button size='sm' colorScheme='blue' onClick={() => handleOpenEditor(id)}>
-                    Edit
+                    {t('edit')}
                   </Button>
                   <Button size='sm' colorScheme='gray' onClick={() => handleDeleteIssue(id)}>
-                    Delete
+                    {t('delete')}
                   </Button>
                 </HStack>
               </HStack>

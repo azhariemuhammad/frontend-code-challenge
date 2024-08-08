@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Button, Flex, Text, Input, GridItem, Grid, Image } from '@chakra-ui/react'
 import { Issue } from '../types'
+import { useTranslation } from 'react-i18next'
 
 type IssueComposerProps = {
   defaultState?: Issue
@@ -9,6 +10,7 @@ type IssueComposerProps = {
 }
 
 export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueComposerProps) => {
+  const { t } = useTranslation()
   const formRef = React.useRef<HTMLFormElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,7 +32,7 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
     <Flex padding={8} flexDir='column' gap={4}>
       <Box textAlign='center'>
         <Text fontSize='lg' fontWeight='medium'>
-          {defaultState?.id ? 'Update Issue' : 'New Issue'}
+          {defaultState?.id ? t('updateIssue') : t('newIssue')}
         </Text>
       </Box>
       <Box as='form' ref={formRef} onSubmit={handleSubmit}>
@@ -47,7 +49,7 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
         <Grid templateColumns='minmax(120px, 1fr) 3fr' gap={4} p={4} alignItems='center'>
           <GridItem>
             <Text fontWeight='medium' color='notion.600'>
-              Issue Number
+              {t('issueNumber')}
             </Text>
           </GridItem>
           <GridItem>
@@ -55,12 +57,12 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
               defaultValue={defaultState?.issueNumber}
               variant='flushed'
               name='issueNumber'
-              placeholder='Enter issue number'
+              placeholder={t('enterIssueNumber')}
             />
           </GridItem>
           <GridItem>
             <Text fontWeight='medium' color='notion.600'>
-              Issue Date
+              {t('issueDate')}
             </Text>
           </GridItem>
           <GridItem>
@@ -68,7 +70,7 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
           </GridItem>
           <GridItem>
             <Text fontWeight='medium' color='notion.600'>
-              Image URI
+              {t('imageUri')}
             </Text>
           </GridItem>
           <GridItem>
@@ -76,7 +78,7 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
               defaultValue={defaultState?.imageUri}
               variant='flushed'
               name='imageUri'
-              placeholder='Enter image URI'
+              placeholder={t('enterImageUri')}
             />
           </GridItem>
         </Grid>
@@ -87,10 +89,10 @@ export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueCompose
         )}
         <Flex justifyContent='flex-end' p={4} borderColor='gray.200'>
           <Button mr={3} onClick={onCancel} color='notion.600'>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button colorScheme='blue' type='submit'>
-            {defaultState?.id ? 'Update' : 'Create'}
+            {defaultState?.id ? t('update') : t('create')}
           </Button>
         </Flex>
       </Box>

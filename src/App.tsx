@@ -3,6 +3,7 @@ import { routes } from './routes'
 import './styles.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AlertProvider } from './components/AlertContext'
+import './i18n'
 
 const App = () => {
   const [queryClient] = React.useState(
