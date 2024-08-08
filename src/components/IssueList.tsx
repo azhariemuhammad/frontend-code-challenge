@@ -95,7 +95,7 @@ export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
       refetch()
       addAlert({
         status: 'success',
-        message: 'Issue deleted successfully',
+        message: t('issueDeletedSuccessfully'),
       })
     })
   }
@@ -103,7 +103,7 @@ export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
   const onSuccessUpdateIssue = () => {
     addAlert({
       status: 'success',
-      message: 'Issue updated successfully',
+      message: t('issueUpdatedSuccessfully'),
     })
     onClose()
     refetch()

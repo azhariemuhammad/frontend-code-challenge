@@ -23,7 +23,7 @@ export const Issues = () => {
           console.error(err)
           addAlert({
             status: 'error',
-            message: 'Error fetching issues',
+            message: t('errorFetchingIssues'),
           })
         }),
   })
@@ -80,7 +80,7 @@ export const Issues = () => {
               createNewIssue(issue, () => {
                 refetch()
                 addAlert({
-                  status: t('success'),
+                  status: 'success',
                   message: t('issueCreatedSuccessfully'),
                 })
               })
