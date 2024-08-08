@@ -1,20 +1,89 @@
-import { Container, Flex, Grid, ModalOverlay, ModalContent, Modal, GridItem } from '@chakra-ui/react'
+import {
+  Container,
+  Flex,
+  Box,
+  Grid,
+  ModalOverlay,
+  ModalContent,
+  Modal,
+  GridItem,
+  Button,
+  Text,
+  HStack,
+  VStack,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { IssueCard } from './IssueCard'
-import { IssueList } from '../types'
 import { IssueComposer } from './IssueComposer'
 import { useState } from 'react'
 import { useUpdateNewIssue } from '../hooks/useUpdateNewIssue'
 import { useDeleteIssue } from '../hooks/useDeleteIssue'
 import { useAlertContext } from './AlertContext'
+import { LoaderGrid } from './LoaderGrid'
+import { IssueList } from '../types'
 
-export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => void }) => {
+type ViewSwitchProps = {
+  isGrid: boolean
+  onToggle: () => void
+}
+
+type IssueListProps = {
+  issues: IssueList
+  refetch: () => void
+  isLoading: boolean
+}
+
+const ViewSwitch = ({ isGrid, onToggle }: ViewSwitchProps) => {
+  return (
+    <Flex
+      as='button'
+      bg='gray.100'
+      borderRadius='md'
+      p='2px'
+      width='64px'
+      height='28px'
+      alignItems='center'
+      justifyContent='space-between'
+      position='relative'
+      onClick={onToggle}
+      transition='all 0.2s'
+      _hover={{ bg: 'gray.200' }}
+    >
+      <Box
+        position='absolute'
+        left={isGrid ? '2px' : '34px'}
+        bg='white'
+        borderRadius='sm'
+        width='28px'
+        height='24px'
+        transition='left 0.2s'
+        boxShadow='sm'
+      />
+      <Flex justify='center' align='center' width='30px' height='24px' zIndex={1}>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='currentColor'>
+          <path d='M1 1h6v6H1zM9 1h6v6H9zM1 9h6v6H1zM9 9h6v6H9z' fillOpacity={isGrid ? '0.7' : '0.3'} />
+        </svg>
+      </Flex>
+      <Flex justify='center' align='center' width='30px' height='24px' zIndex={1}>
+        <svg width='16' height='16' viewBox='0 0 16 16' fill='currentColor'>
+          <path d='M1 2h14v3H1zM1 7h14v3H1zM1 12h14v3H1z' fillOpacity={!isGrid ? '0.7' : '0.3'} />
+        </svg>
+      </Flex>
+    </Flex>
+  )
+}
+
+export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
   const { addAlert } = useAlertContext()
   const [selectedIssue, setSelectedIssue] = useState('')
   const updateIssue = useUpdateNewIssue()
   const deleteIssue = useDeleteIssue()
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleOpenEditor = (id: string) => {
     setSelectedIssue(id)
+    onOpen()
   }
 
   const handleDeleteIssue = (id: string) => {
@@ -32,43 +101,95 @@ export const List = ({ issues, refetch }: { issues: IssueList; refetch: () => vo
       status: 'success',
       message: 'Issue updated successfully',
     })
-    setSelectedIssue('')
+    onClose()
     refetch()
   }
+
+  const renderGridView = () => (
+    <Grid templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6} w='full'>
+      {issues.map(({ id, title, imageUri, issueNumber, issueDate }) => (
+        <GridItem key={id} w='full' h={{ sm: 'auto', md: 'auto' }}>
+          <IssueCard
+            title={title}
+            issueNumber={issueNumber}
+            issueDate={issueDate}
+            imageUri={imageUri}
+            onOpenEditor={() => handleOpenEditor(id)}
+            onDeleteIssue={() => handleDeleteIssue(id)}
+          />
+        </GridItem>
+      ))}
+    </Grid>
+  )
+
+  const renderListView = () => (
+    <VStack spacing={4} align='stretch' w='full'>
+      {issues.map(({ id, title, issueNumber, issueDate }) => {
+        const date = new Date(issueDate)
+        const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })
+        const monthName = date.toLocaleDateString('en-US', { month: 'short' })
+        const dayNumber = date.getDate().toString().padStart(2, '0')
+        return (
+          <Box key={id} p={4} borderWidth={1} borderRadius='md' boxShadow='sm'>
+            <Flex justifyContent='space-between' gap={5}>
+              <Box w='fit-content'>
+                <Text fontSize='sm' color='gray.500' textAlign='center'>
+                  {monthName}
+                </Text>
+                <Text fontSize='3xl' fontWeight='bold' color='orange.500'>
+                  {dayNumber}
+                </Text>
+              </Box>
+              <HStack justify='space-between' w='full'>
+                <VStack align='start' spacing={1}>
+                  <Text fontWeight='bold'>{title}</Text>
+                  <Text fontSize='sm'>
+                    Issue: {issueNumber} | Date: {issueDate}
+                  </Text>
+                </VStack>
+                <HStack>
+                  <Button size='sm' onClick={() => handleOpenEditor(id)}>
+                    Edit
+                  </Button>
+                  <Button size='sm' colorScheme='red' onClick={() => handleDeleteIssue(id)}>
+                    Delete
+                  </Button>
+                </HStack>
+              </HStack>
+            </Flex>
+          </Box>
+        )
+      })}
+    </VStack>
+  )
 
   return (
     <>
       <Container maxW='container.xl' padding='2'>
+        <Flex justifyContent='flex-end' alignItems='center' mb={4}>
+          <ViewSwitch
+            isGrid={viewMode === 'grid'}
+            onToggle={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+          />
+        </Flex>
         <Flex justifyContent='center' alignItems='center' flexDirection='column' gap={6}>
-          <Grid templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }} gap={6} w='full'>
-            {issues.map(({ id, title, imageUri, issueNumber, issueDate }) => (
-              <GridItem key={id} w='full' h={{ sm: 'auto', md: 'auto' }}>
-                <IssueCard
-                  title={title}
-                  issueNumber={issueNumber}
-                  issueDate={issueDate}
-                  imageUri={imageUri}
-                  onOpenEditor={() => handleOpenEditor(id)}
-                  onDeleteIssue={() => handleDeleteIssue(id)}
-                />
-              </GridItem>
-            ))}
-          </Grid>
+          {isLoading && viewMode === 'grid' && <LoaderGrid />}
+          {!isLoading && viewMode === 'grid' && renderGridView()}
+          {!isLoading && viewMode === 'list' && renderListView()}
         </Flex>
       </Container>
-      {selectedIssue && (
-        <Modal isOpen={Boolean(selectedIssue)} onClose={() => setSelectedIssue('')}>
-          <ModalOverlay />
-          <ModalContent>
-            <IssueComposer
-              onSubmit={updatedIssue => {
-                updateIssue(updatedIssue, onSuccessUpdateIssue)
-              }}
-              defaultState={issues.find(issue => issue.id === selectedIssue)}
-            />
-          </ModalContent>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen} onClose={onClose} size='3xl'>
+        <ModalOverlay />
+        <ModalContent>
+          <IssueComposer
+            onCancel={onClose}
+            onSubmit={updatedIssue => {
+              updateIssue(updatedIssue, onSuccessUpdateIssue)
+            }}
+            defaultState={issues.find(issue => issue.id === selectedIssue)}
+          />
+        </ModalContent>
+      </Modal>
     </>
   )
 }

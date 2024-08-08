@@ -31,12 +31,11 @@ export const Issues = () => {
   const { data, isLoading, refetch } = queryResult
 
   const [isOpen, setIsOpen] = React.useState(false)
-
   return (
     <>
       <Box my={8}>
         <Flex justifyContent='space-between' alignItems='center' gap={4} m={4} flexWrap={'wrap'}>
-          <Text fontWeight='extrabold' fontSize='2xl'>
+          <Text fontWeight='extrabold' fontSize='2xl' color='notion.800'>
             Past Issues
           </Text>
           <Flex gap={2}>
@@ -46,10 +45,9 @@ export const Issues = () => {
             </Button>
           </Flex>
         </Flex>
-        {isLoading && <p>Loading...</p>}
         {isSearching && data?.issues.length === 0 ? (
           <Box h='2rem' textAlign='center' w='full' mt='8'>
-            <Text fontSize='xl' fontWeight='medium' mb={4}>
+            <Text fontSize='xl' fontWeight='medium' mb={4} color='notion.800'>
               No results found for "{query}"
             </Text>
             <Button
@@ -62,14 +60,14 @@ export const Issues = () => {
             </Button>
           </Box>
         ) : (
-          <List refetch={refetch} issues={data?.issues || []} />
+          <List refetch={refetch} issues={data?.issues || []} isLoading={isLoading} />
         )}
       </Box>
-
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} size='xl'>
         <ModalOverlay />
         <ModalContent>
           <IssueComposer
+            onCancel={() => setIsOpen(false)}
             onSubmit={issue => {
               setIsOpen(false)
               createNewIssue(issue, () => {

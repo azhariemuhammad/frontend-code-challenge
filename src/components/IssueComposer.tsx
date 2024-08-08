@@ -1,13 +1,14 @@
 import React from 'react'
-import { Box, Button, Flex, Stack, Text, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, Input, GridItem, Grid, Image } from '@chakra-ui/react'
 import { Issue } from '../types'
 
 type IssueComposerProps = {
   defaultState?: Issue
   onSubmit: (issue: Issue) => void
+  onCancel: () => void
 }
 
-export const IssueComposer = ({ defaultState, onSubmit }: IssueComposerProps) => {
+export const IssueComposer = ({ defaultState, onSubmit, onCancel }: IssueComposerProps) => {
   const formRef = React.useRef<HTMLFormElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,37 +33,67 @@ export const IssueComposer = ({ defaultState, onSubmit }: IssueComposerProps) =>
           {defaultState?.id ? 'Update Issue' : 'New Issue'}
         </Text>
       </Box>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <Stack spacing={4}>
-          <FormControl>
-            <FormLabel>Title</FormLabel>
-            <Input isRequired defaultValue={defaultState?.title} name='title' placeholder='Title' />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Issue Number</FormLabel>
+      <Box as='form' ref={formRef} onSubmit={handleSubmit}>
+        <Input
+          defaultValue={defaultState?.title}
+          variant='unstyled'
+          placeholder='Untitled'
+          fontSize='2xl'
+          fontWeight='bold'
+          name='title'
+          mb={4}
+          p={4}
+        />
+        <Grid templateColumns='minmax(120px, 1fr) 3fr' gap={4} p={4} alignItems='center'>
+          <GridItem>
+            <Text fontWeight='medium' color='notion.600'>
+              Issue Number
+            </Text>
+          </GridItem>
+          <GridItem>
             <Input
-              type='number'
-              isRequired
               defaultValue={defaultState?.issueNumber}
+              variant='flushed'
               name='issueNumber'
-              placeholder='Issue Number'
+              placeholder='Enter issue number'
             />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Issue Date</FormLabel>
-            <Input isRequired defaultValue={defaultState?.issueDate} type='date' name='issueDate' />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Image URI</FormLabel>
-            <Input isRequired defaultValue={defaultState?.imageUri} name='imageUri' placeholder='Image URI' />
-          </FormControl>
-        </Stack>
-        <Flex justifyContent='flex-end' mt='2'>
-          <Button bgColor='blue.400' color='white' type='submit'>
-            {defaultState ? 'Update' : 'Submit'}
+          </GridItem>
+          <GridItem>
+            <Text fontWeight='medium' color='notion.600'>
+              Issue Date
+            </Text>
+          </GridItem>
+          <GridItem>
+            <Input defaultValue={defaultState?.issueDate} variant='flushed' type='date' name='issueDate' />
+          </GridItem>
+          <GridItem>
+            <Text fontWeight='medium' color='notion.600'>
+              Image URI
+            </Text>
+          </GridItem>
+          <GridItem>
+            <Input
+              defaultValue={defaultState?.imageUri}
+              variant='flushed'
+              name='imageUri'
+              placeholder='Enter image URI'
+            />
+          </GridItem>
+        </Grid>
+        {defaultState?.imageUri && (
+          <GridItem colSpan={2} mb={4} w='full'>
+            <Image src={defaultState?.imageUri} alt='image' objectFit='fill' height='100%' width='100%' />
+          </GridItem>
+        )}
+        <Flex justifyContent='flex-end' p={4} borderColor='gray.200'>
+          <Button mr={3} onClick={onCancel} color='notion.600'>
+            Cancel
+          </Button>
+          <Button colorScheme='blue' type='submit'>
+            {defaultState?.id ? 'Update' : 'Create'}
           </Button>
         </Flex>
-      </form>
+      </Box>
     </Flex>
   )
 }

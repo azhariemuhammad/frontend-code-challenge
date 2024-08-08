@@ -75,8 +75,10 @@ export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEdito
         />
       </Box>
       <CardBody p={2}>
-        <Heading size='md'>{title}</Heading>
-        <Flex gap={2} fontWeight='medium' color='slategray'>
+        <Heading size='md' color='notion.700'>
+          {title}
+        </Heading>
+        <Flex gap={2} fontWeight='medium' color='notion.400'>
           <Text>Issue: {issueNumber}</Text>
           <span>|</span>
           <Text>{format(new Date(issueDate), 'MMM yyyy')}</Text>
