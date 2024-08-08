@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import useLazyLoadImage from '../hooks/useLazyLoadImage'
+import { CalendarIcon } from '@chakra-ui/icons'
 
 type IssueCardProps = {
   title: string
@@ -46,9 +47,17 @@ export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEdito
   const imgRef = useLazyLoadImage()
 
   return (
-    <Card w='full'>
+    <Card
+      w='full'
+      boxShadow='0px 3px 12px rgba(0, 0, 0, 0.09)'
+      transition='all 0.3s ease-in-out'
+      _hover={{
+        transform: 'scale(1.03)',
+        boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
+      }}
+    >
       <Box position='relative'>
-        <Menu isLazy>
+        <Menu isLazy placement='bottom-end'>
           <MenuButton
             position='absolute'
             right={0}
@@ -75,13 +84,15 @@ export const IssueCard = ({ title, imageUri, issueDate, issueNumber, onOpenEdito
         />
       </Box>
       <CardBody p={2}>
-        <Heading size='md' color='notion.700'>
+        <Heading size='sm' color='notion.700' mb={2}>
           {title}
         </Heading>
-        <Flex gap={2} fontWeight='medium' color='notion.400'>
+        <Flex gap={2} fontWeight='medium' color='notion.400' justifyContent='space-between' fontSize='sm'>
           <Text>Issue: {issueNumber}</Text>
-          <span>|</span>
-          <Text>{format(new Date(issueDate), 'MMM yyyy')}</Text>
+          <Flex gap={2} alignItems='center'>
+            <CalendarIcon />
+            <Text>{format(new Date(issueDate), 'MMM yyyy')}</Text>
+          </Flex>
         </Flex>
       </CardBody>
     </Card>

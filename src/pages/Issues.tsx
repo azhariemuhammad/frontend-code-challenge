@@ -7,6 +7,7 @@ import { config } from '../config'
 import { useCreateNewIssue } from '../hooks/useCreateNewIssue'
 import ExpandableSearch from '../components/ExpandableSearch'
 import { useAlertContext } from '../components/AlertContext'
+import { generateRandomUnsplashUrl } from '../utils/randomUnsplash'
 
 export const Issues = () => {
   const { addAlert } = useAlertContext()
@@ -31,16 +32,17 @@ export const Issues = () => {
   const { data, isLoading, refetch } = queryResult
 
   const [isOpen, setIsOpen] = React.useState(false)
+  console.log(generateRandomUnsplashUrl())
   return (
     <>
       <Box my={8}>
         <Flex justifyContent='space-between' alignItems='center' gap={4} m={4} flexWrap={'wrap'}>
-          <Text fontWeight='extrabold' fontSize='2xl' color='notion.800'>
+          <Text fontWeight='600' fontSize='2xl' color='notion.800'>
             Past Issues
           </Text>
           <Flex gap={2}>
             <ExpandableSearch onSubmit={(title: string) => setQuery(title)} />
-            <Button bgColor='blue.400' color='white' onClick={() => setIsOpen(true)}>
+            <Button bgColor='blue.400' color='white' onClick={() => setIsOpen(true)} fontSize='sm' fontWeight='medium'>
               New Issue
             </Button>
           </Flex>

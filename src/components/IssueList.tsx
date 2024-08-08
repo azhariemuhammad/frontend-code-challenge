@@ -13,6 +13,7 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react'
+import { format } from 'date-fns'
 import { IssueCard } from './IssueCard'
 import { IssueComposer } from './IssueComposer'
 import { useState } from 'react'
@@ -21,6 +22,7 @@ import { useDeleteIssue } from '../hooks/useDeleteIssue'
 import { useAlertContext } from './AlertContext'
 import { LoaderGrid } from './LoaderGrid'
 import { IssueList } from '../types'
+import { CalendarIcon } from '@chakra-ui/icons'
 
 type ViewSwitchProps = {
   isGrid: boolean
@@ -131,7 +133,7 @@ export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
         const dayNumber = date.getDate().toString().padStart(2, '0')
         return (
           <Box key={id} p={4} borderWidth={1} borderRadius='md' boxShadow='sm'>
-            <Flex justifyContent='space-between' gap={5}>
+            <Flex justifyContent='space-between' gap={6}>
               <Box w='fit-content'>
                 <Text fontSize='sm' color='gray.500' textAlign='center'>
                   {monthName}
@@ -143,15 +145,19 @@ export const List = ({ issues, refetch, isLoading }: IssueListProps) => {
               <HStack justify='space-between' w='full'>
                 <VStack align='start' spacing={1}>
                   <Text fontWeight='bold'>{title}</Text>
-                  <Text fontSize='sm'>
-                    Issue: {issueNumber} | Date: {issueDate}
+                  <Text fontSize='sm' color='notion.400'>
+                    Issue: {issueNumber}
                   </Text>
+                  <Flex gap={2} alignItems='center' fontSize='sm' color='notion.400'>
+                    <CalendarIcon />
+                    <Text>{format(new Date(issueDate), 'MMM yyyy')}</Text>
+                  </Flex>
                 </VStack>
                 <HStack>
-                  <Button size='sm' onClick={() => handleOpenEditor(id)}>
+                  <Button size='sm' colorScheme='blue' onClick={() => handleOpenEditor(id)}>
                     Edit
                   </Button>
-                  <Button size='sm' colorScheme='red' onClick={() => handleDeleteIssue(id)}>
+                  <Button size='sm' colorScheme='gray' onClick={() => handleDeleteIssue(id)}>
                     Delete
                   </Button>
                 </HStack>
