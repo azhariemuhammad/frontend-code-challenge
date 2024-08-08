@@ -58,6 +58,8 @@ This caching method is particularly effective for our use case, where the data d
 - Update issue
 - Delete issue
 - Search issue by title
+- Support multiple languages
+- Switch between grid and list view
 
 ## Getting Started
 
